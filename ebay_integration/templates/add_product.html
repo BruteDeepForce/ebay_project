@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ürün Ekle</title>
+    <style>
+        body {
+            background: #f5f7fa;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background: #ffffff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Ebay Ürün Ekle</h2>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <label for="title">Başlık:</label>
+            <input type="text" name="title" required>
+            
+            <label for="description">Açıklama:</label>
+            <textarea name="description" rows="3" required></textarea>
+            
+            <label for="price">Fiyat:</label>
+            <input type="text" name="price" required>
+            
+            <label for="category_id">Kategori:</label>
+            <select name="category_id" required>
+                {% for category in categories %}
+                    <option value="{{ category.category_id }}">{{ category.category_name }}</option>
+                {% endfor %}
+            </select>
+            
+            <label for="condition">Durum:</label>
+            <input type="text" name="condition" required>
+            
+            <label for="stock_quantity">Stok Adedi:</label>
+            <input type="number" name="stock_quantity" required>
+            
+            <button type="submit">Ürünü Ekle</button>
+        </form>
+    </div>
+
+</body>
+</html>
